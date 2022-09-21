@@ -1,0 +1,204 @@
+﻿@model AnimaLove.Models.AppUser
+@using AnimaLove.DAL
+@inject AppDbContext _context
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "GetOthersProfile";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"
+          integrity="sha512-wR4oNhLBHf7smjy0K4oqzdWumd+r5/+6QO/vDda76MW5iug4PT7v86FoEkySIJft3XA0Ae6axhIvHrqwm793Nw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC:wght@700&family=Josefin+Sans:ital,wght@0,400;1,700&family=Nunito+Sans&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Amatic+SC:wght@700&family=Josefin+Sans:ital,wght@0,400;1,700&display=swap"
+          rel="stylesheet">
+    <link rel="icon" href="~/assets/img/icon-img.png">
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <title>AnimaLove</title>
+</head>
+
+
+<body>
+    <main>
+        <section id="profile">
+            <div class="profile">
+                <div class="profile-inner">
+                    <div class="user-info">
+                        <div class="user-info-items">
+                            <img src="~/assets/img/@Model.ProfileImage" alt="user">
+                            <p class="user-fullname">@Model.FullName</p>
+                            <p class="user-nickname">
+                                @Model.UserName <a asp-controller="Message" asp-action="Index">
+                                    <i class="fa-solid fa-message"></i>
+                                </a>
+                            </p>
+                            <div class="follow-info">
+                                <a asp-controller="Follower" asp-action="GetFollowers" asp-route-id="@Model.Id">Followers</a>
+                                <a asp-controller="Following" asp-action="GetFollowings" asp-route-id="@Model.Id">Followings</a>
+                            </div>
+                            <div class="follow">
+                                @{
+
+                                    bool IsExist = _context.FollowingUser.Where(f => !f.IsDeleted).Any(c => c.FollowingId == Model.Id);
+                                    if (IsExist)
+                                    {
+                                        <div class="follow-main">
+                                            <a style="color:white;" asp-controller="Following" asp-action="UnfollowAction" asp-route-id="@Model.Id"> Unfollow</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="follow-main">
+                                            <a style="color:white;" asp-controller="Follower" asp-action="FollowAction" asp-route-id="@Model.Id"> Follow</a>
+                                        </div>
+                                    }
+                                }
+                            </div>
+
+
+
+
+                            @* @{
+
+            bool IsExist = _context.FollowingUser.Where(f=>!f.IsDeleted).Any(c => c.FollowingId == user.Id);
+            if (IsExist)
+            {
+                <div class="follow-main">
+                    <a style="color:white;" asp-controller="Following" asp-action="UnfollowAction" asp-route-id="@user.Id"> Unfollow</a>
+                </div>
+            }
+            else
+            {
+                <div class="follow-main">
+                    <a style="color:white;" asp-controller="Follower" asp-action="FollowAction" asp-route-id="@user.Id"> Follow</a>
+                </div>
+            }
+        }*@
+
+
+
+                        </div>
+                        <div class="user-info-items description-item">
+                            <div class="user-description">
+                                <div class="user-description-main-item">
+
+                                    <div>
+                                        <p class="user-desc">
+                                            <b>User Description</b>
+                                            @Model.Description
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" logo-item my-post-title">
+
+                        <div class="logo-and-settings logo-item">
+                            <img src="~/assets/img/logo.png" alt="logo">
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+        <section>
+            <div>
+                <a asp-controller="Post" asp-action="GetOthersPosts" asp-route-id="@Model.Id"> <p style="text-align: center; color: #3e97a3; font-size:50px; font-weight:700;cursor:pointer;" class="getposttext">Watch Posts</p></a>
+            </div>
+        </section>
+        @*<section id="myposts">
+            <div class="myposts">
+                <div class="my-posts-inner">
+                    <div class="posts-items">
+
+
+                        </a>
+                        <a href="www" class="post-link">
+                            <div class="single-post-items">
+                                <img src="~/assets/img/awsome-cat-img.jpg" alt="photo">
+                            </div>
+                        </a>
+                        <a href="www" class="post-link">
+                            <div class="single-post-items">
+                                <img src="~/assets/img/awsome-cat-img.jpg" alt="photo">
+                            </div>
+                        </a>
+                        <a href="www" class="post-link">
+                            <div class="single-post-items">
+                                <img src="~/assets/img/awsome-cat-img.jpg" alt="photo">
+                            </div>
+                        </a>
+                        <a href="www" class="post-link">
+                            <div class="single-post-items">
+                                <img src="~/assets/img/awsome-cat-img.jpg" alt="photo">
+                            </div>
+                        </a>
+                        <a href="www" class="post-link">
+                            <div class="single-post-items">
+                                <img src="~/assets/img/awsome-cat-img.jpg" alt="photo">
+                            </div>
+                        </a>
+                        <a href="www" class="post-link">
+                            <div class="single-post-items">
+                                <img src="~/assets/img/awsome-cat-img.jpg" alt="photo">
+                            </div>
+                        </a>
+                        <a href="www" class="post-link">
+                            <div class="single-post-items">
+                                <img src="~/assets/img/awsome-cat-img.jpg" alt="photo">
+                            </div>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    </main>
+    <!-- scripts started -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+            integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="~/assets/js/hamburger-bars.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/slider.js"></script>
+    <script src="~/assets/js/shop-basket.js"></script>
+</body>
+
+</html>
+

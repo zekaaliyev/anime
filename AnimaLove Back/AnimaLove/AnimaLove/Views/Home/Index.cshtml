@@ -1,0 +1,167 @@
+﻿@using AnimaLove.ViewModels
+@using AnimaLove.Models
+
+@model HomeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- main started -->
+<main>
+    <!-- slider section started -->
+    <section id="slider">
+        <div class="slider-box">
+            <div class="slider-text">
+                <div class="slider-text-inner">
+
+                    @foreach (var summary in Model.SlideSummaries)
+                    {
+                        <h3>@summary.Title</h3>
+                        <p>
+                            @summary.Description
+                        </p>
+                    }
+
+                </div>
+            </div>
+            <div class="slider-box-inner">
+
+                @foreach (var slide in Model.Slides)
+                {
+                    <div><img src="~/assets/img/@slide.Image" alt="animal-image"></div>
+                }
+
+
+
+
+
+            </div>
+        </div>
+    </section>
+    <!-- slider section end -->
+    <!-- adopt  pet section started -->
+    <section id="adoption">
+        <div class="adoption">
+            <div class="adoption-inner">
+                <div class="adoption-title" data-aos="fade-down" data-aos-duration="1000">
+                    <p style="font-size:70px; font-weight:700;">Adopt Pet</p>
+                </div>
+
+                <div class="cards">
+
+                    <div class="cards-row container">
+
+                        <a asp-controller="Home" asp-action="CreateAnnouncement" >
+                            <div class="column" data-aos="fade-down" data-aos-duration="2000">
+                                <div class="card-item " style="border: 3px solid #3e97a3; display:flex; justify-content:center; align-items:center;">
+                                    <p style="color: #3e97a3; font-size:30px; font-weight:700;">ADD NEW ONE</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        @foreach (var pet in Model.Pets)
+                        {
+                            <div class="column" data-aos="fade-down" data-aos-duration="2000">
+                                <div class="card-item ">
+                                    <div class="animal-image">
+                                        <img src="~/assets/img/@pet.Image" alt="animal image">
+                                    </div>
+                                    <div class="animal-context">
+                                        <p class="animal-name">@pet.Name</p>
+                                        <p class="animal-message">
+                                            @pet.Description 
+                                           
+                                        </p>
+                                        <div class="main-adopt-button">
+                                            <div class="adopt-button">
+                                                <a href="#">Adopt</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- adopt  pet section ended -->
+    <!-- parallax section started -->
+    <section id="parallax">
+        <div class="parallax">
+            <div class="parallax-inner">
+
+            </div>
+        </div>
+    </section>
+    <!-- parallax section ended -->
+    <!-- why animals section started -->
+    <section id="why-animals">
+        <div class="why-animals">
+            <h1 data-aos="fade-down" data-aos-duration="1000">why animals should be necessary for us?</h1>
+            <div class="why-animals-inner animals-inner">
+                <div class="why-animals-inner-box">
+                    <div class="why-animals-inner-items" data-aos="fade-down" data-aos-duration="1000">
+                        <p>
+                            Animals play an important role in many people’s lives. In addition to seeing-eye dogs and dogs that can be trained to detect seizures, animals can also be used in occupational therapy, speech therapy, or physical rehabilitation to help patients recover.Aside from these designated therapeutic roles, animals are also valued as companions, which can certainly affect the quality of our lives. Is that companionship beneficial to our health?
+                            Companion animals may improve heart health by lowering blood pressure and regulating the heart rate during stressful situations. In a 2002 study, researchers measured changes in heart rate and blood pressure among people who had a dog or cat, compared to those who did not, when participants were under stress (performing a timed math task). People with a dog or cat had lower resting heart rates and blood pressure measures at the
+                        </p>
+                    </div>
+
+                    <div class="why-animals-inner-items" data-aos="fade-down" data-aos-duration="1000">
+                        <img src="~/assets/img/awsome-cat-img.jpg" alt="">
+                    </div>
+                </div>
+                <div class="why-animals-inner-box" data-aos="fade-down" data-aos-duration="1000">
+                    <div class="why-animals-inner-items">
+                        <img src="~/assets/img/cat-with-glasses.jpg" alt="">
+                    </div>
+                    <div class="why-animals-inner-items" data-aos="fade-down" data-aos-duration="1000">
+                        <p>
+                            beginning of the experiment than non-pet owners. People with a dog or cat were also less likely to have spikes in heart rates and blood pressure while performing the math task, and their heart rates and blood pressure returned to normal more quickly. The study was conducted with pet owners when the pets were present, and also when the pets were not present.  Pet owners had better cardiac responses in either situation, and especially when pets were present. They also made fewer errors in their math when their pet was present in the room.
+
+                            Children’s exposure to companion animals may also ease anxiety. For example, one study measured blood pressure, heart rate, and behavioral distress in healthy children aged 3 to 6 at two different doctor visits for routine physicals. At one visit, a dog (unrelated to the child) was present in the room and at the other visit the dog was absent. When the dog was present, children had lower blood pressure measures, lower heart rates, and less behavioral distress.[7] However, research on the health benefits of child and animal interaction is still limited. Further research is needed on how pets influence child development and specific health outcomes.
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- why animals section ended -->
+    <!-- our galerry section started -->
+    <section id="our-galerry">
+        <div class="our-galerry">
+            <div class="our-galerry-inner">
+                <div class="our-galerry-inner-main">
+                    <h2>Our gallery</h2>
+                </div>
+                <div class="our-galery-images-main" data-aos="fade-down" data-aos-duration="1000">
+
+                    <div class="our-galery-images our-gallery-row">
+
+                        @foreach (var item in Model.Galleries)
+                        {
+                            <div>
+                                <img src="~/assets/img/@item.Image" alt="our galery photos">
+                            </div>
+                        }
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- our galerry section ended -->
+</main>
+<!-- main ended -->

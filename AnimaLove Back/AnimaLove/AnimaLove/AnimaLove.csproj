@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20220808145937_UpdateUsersTableAddingDescription.cs" />
+    <Compile Remove="Migrations\20220808145937_UpdateUsersTableAddingDescription.Designer.cs" />
+    <Compile Remove="Migrations\20220808150032_UpdateProfileTable.cs" />
+    <Compile Remove="Migrations\20220808150032_UpdateProfileTable.Designer.cs" />
+    <Compile Remove="Migrations\20220816165537_SomeChanges.cs" />
+    <Compile Remove="Migrations\20220816165537_SomeChanges.Designer.cs" />
+    <Compile Remove="Migrations\20220816172550_FollowerDbSet.cs" />
+    <Compile Remove="Migrations\20220816172550_FollowerDbSet.Designer.cs" />
+    <Compile Remove="Migrations\20220816172757_FollowerUserDbSet.cs" />
+    <Compile Remove="Migrations\20220816172757_FollowerUserDbSet.Designer.cs" />
+    <Compile Remove="Migrations\20220827171033_IsDeletedFollower.cs" />
+    <Compile Remove="Migrations\20220827171033_IsDeletedFollower.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.27" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.27">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+</Project>
